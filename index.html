@@ -94,17 +94,6 @@
       .hairline { background: linear-gradient(90deg, transparent, rgba(255,255,255,.28) 22%,
                   rgba(255,255,255,.62) 50%, rgba(255,255,255,.28) 78%, transparent); }
 
-      /* ------------------------------------------------------------------
-         HERO VIDEO — watermark crop.
-         scale() alone trims all four edges evenly (~4.5% each at scale-110),
-         so a watermark inset from the corner can survive. The extra nudge
-         concentrates the crop at the bottom-right, where the watermark is.
-         Deliberately physical, not logical: the watermark is baked into the
-         file and must NOT mirror when Arabic flips the page.
-         Widen these two values if your watermark sits further in.
-         ------------------------------------------------------------------ */
-      .hero-video { transform: scale(1.1) translate(1.2%, 1.5%); }
-
       @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after {
           animation-duration: .001ms !important;
@@ -186,11 +175,21 @@
         <div class="absolute -inset-x-[10%] -top-[22%] -z-30 h-[92%] blur-[14px]
                     bg-[radial-gradient(60%_62%_at_50%_45%,rgba(150,170,190,.30),transparent_70%)]"></div>
 
-        <!-- VIDEO BACKGROUND -->
+        <!-- VIDEO BACKGROUND
+             Watermark crop: scale-[1.07] pushes every edge ~3.5% outside the
+             section, which is overflow-hidden, so the outer band is clipped.
+             The two translate utilities bias that crop toward the bottom-right
+             corner, where the watermark actually sits — a centred scale alone
+             trims all four edges equally and can leave it visible.
+             Physical (translate-x/y), not logical: the watermark is baked into
+             the file and must NOT mirror when Arabic flips the page.
+             Raise the values if your watermark sits further in.
+             The %20 in the filename encodes the spaces. -->
         <video data-hero-video
-               class="hero-video absolute inset-0 -z-20 h-full w-full object-cover"
+               class="absolute inset-0 -z-20 h-full w-full object-cover
+                      scale-[1.07] translate-x-[1%] translate-y-[1.2%]"
                autoplay loop muted playsinline preload="auto" aria-hidden="true" tabindex="-1">
-            <source src="hero-car.mp4" type="video/mp4">
+            <source src="Cinematic%20Apple-style%20product.mp4" type="video/mp4">
         </video>
 
         <!-- DARK OVERLAY — above the video, below the copy -->
