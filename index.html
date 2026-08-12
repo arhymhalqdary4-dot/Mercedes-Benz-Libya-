@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مرسيدس-بنز ليبيا | Mercedes Libya</title>
+    <meta name="description" content="الوكيل المعتمد لسيارات مرسيدس-بنز في ليبيا. اكتشف أحدث الموديلات واطلب عرض سعر.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Cairo', sans-serif; background-color: #050505; color: #ffffff; }
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="antialiased selection:bg-gray-600 selection:text-white flex flex-col min-h-screen">
+
+    <!-- ==================== الهيدر ==================== -->
+    <header class="fixed w-full top-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-black tracking-widest uppercase">
+                Mercedes <span class="font-light">Libya</span>
+            </a>
+
+            <nav class="hidden md:flex space-x-8 space-x-reverse">
+                <a href="index.html" class="text-white transition duration-300">الرئيسية</a>
+                <a href="models.html" class="hover:text-gray-400 transition duration-300">الموديلات</a>
+                <a href="#about" class="hover:text-gray-400 transition duration-300">من نحن</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <a href="#contact" class="hidden sm:inline-block px-6 py-2 border border-white hover:bg-white hover:text-black transition duration-300 font-bold">تواصل معنا</a>
+
+                <!-- زر قائمة الجوال -->
+                <button id="menuBtn" type="button" aria-label="القائمة" aria-expanded="false" aria-controls="mobileMenu"
+                        class="md:hidden p-2 border border-white/30 hover:border-white transition duration-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- قائمة الجوال -->
+        <nav id="mobileMenu" class="hidden md:hidden border-t border-white/10 bg-black/95 backdrop-blur-md">
+            <div class="container mx-auto px-6 py-4 flex flex-col gap-4">
+                <a href="index.html" class="hover:text-gray-400 transition duration-300">الرئيسية</a>
+                <a href="models.html" class="hover:text-gray-400 transition duration-300">الموديلات</a>
+                <a href="#about" class="hover:text-gray-400 transition duration-300">من نحن</a>
+                <a href="#contact" class="hover:text-gray-400 transition duration-300">تواصل معنا</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ==================== قسم الفيديو الافتتاحي ==================== -->
+    <section class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+        <!-- فيديو الخلفية: ضع ملف hero.mp4 بجانب الصفحة. عند غيابه تظهر خلفية متدرجة فاخرة -->
+        <video id="heroVideo"
+               class="absolute inset-0 w-full h-full object-cover"
+               autoplay muted loop playsinline preload="metadata"
+               poster="1000135865.jpg">
+            <source src="hero.mp4" type="video/mp4">
+        </video>
+
+        <!-- خلفية احتياطية -->
+        <div class="absolute inset-0 -z-10 bg-gradient-to-br from-gray-900 via-black to-gray-800"></div>
+
+        <!-- طبقة التعتيم -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black z-10"></div>
+
+        <div class="relative z-20 px-4">
+            <h1 class="text-5xl md:text-7xl font-black mb-4 drop-shadow-lg">الأفضل أو لا شيء.</h1>
+            <p class="text-lg md:text-2xl font-light mb-8 text-gray-300">اكتشف الفخامة الحقيقية مع وكيل مرسيدس المعتمد في ليبيا.</p>
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <a href="models.html" class="px-8 py-3 bg-white text-black font-bold hover:bg-gray-200 transition duration-300">
+                    استكشف الموديلات
+                </a>
+                <a href="#contact" class="px-8 py-3 border border-white/60 font-bold hover:bg-white hover:text-black transition duration-300">
+                    اطلب عرض سعر
+                </a>
+            </div>
+        </div>
+
+        <!-- مؤشر التمرير -->
+        <a href="#about" aria-label="تمرير للأسفل"
+           class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 text-white/60 hover:text-white transition duration-300 animate-bounce">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+            </svg>
+        </a>
+    </section>
+
+    <main class="flex-grow">
+        <!-- ==================== من نحن ==================== -->
+        <section id="about" class="py-24 container mx-auto px-6 scroll-mt-24">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-4xl font-bold mb-6">من نحن</h2>
+                <p class="text-gray-400 leading-loose text-lg">
+                    نحن الوكيل المعتمد لسيارات مرسيدس-بنز في ليبيا. نقدّم تشكيلة من أرقى السيارات الألمانية،
+                    مدعومة بخدمة ما بعد البيع، وقطع غيار أصلية، وفريق فني مدرّب على أعلى المعايير العالمية.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-14">
+                <div class="bg-black/40 backdrop-blur-md border border-white/20 rounded-2xl p-8 text-center">
+                    <div class="text-4xl font-black mb-2">100%</div>
+                    <p class="text-gray-400">سيارات أصلية بضمان الوكيل</p>
+                </div>
+                <div class="bg-black/40 backdrop-blur-md border border-white/20 rounded-2xl p-8 text-center">
+                    <div class="text-4xl font-black mb-2">+15</div>
+                    <p class="text-gray-400">عاماً من الخبرة في السوق الليبي</p>
+                </div>
+                <div class="bg-black/40 backdrop-blur-md border border-white/20 rounded-2xl p-8 text-center">
+                    <div class="text-4xl font-black mb-2">24/7</div>
+                    <p class="text-gray-400">دعم فني وخدمة عملاء</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== دعوة لاستكشاف الموديلات ==================== -->
+        <section id="contact" class="py-24 border-t border-white/10 scroll-mt-24">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold mb-4">جاهز لتجربة القيادة؟</h2>
+                <p class="text-gray-400 mb-8">تصفح تشكيلتنا الكاملة واطلب عرض سعر خاص بك.</p>
+                <a href="models.html" class="inline-block px-10 py-4 bg-white text-black font-bold hover:bg-gray-200 transition duration-300">
+                    عرض جميع الموديلات
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== الفوتر ==================== -->
+    <footer class="border-t border-white/10 py-8 text-center text-gray-500 text-sm mt-auto">
+        <p>&copy; 2026 مرسيدس-بنز ليبيا. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        // قائمة الجوال
+        (function () {
+            var btn = document.getElementById('menuBtn');
+            var menu = document.getElementById('mobileMenu');
+            if (!btn || !menu) return;
+
+            btn.addEventListener('click', function () {
+                var isOpen = menu.classList.toggle('hidden') === false;
+                btn.setAttribute('aria-expanded', String(isOpen));
+            });
+
+            menu.addEventListener('click', function (e) {
+                if (e.target.tagName === 'A') {
+                    menu.classList.add('hidden');
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+            });
+        })();
+
+        // إخفاء الفيديو إذا لم يتوفر الملف حتى تظهر الخلفية المتدرجة
+        (function () {
+            var video = document.getElementById('heroVideo');
+            if (!video) return;
+            var source = video.querySelector('source');
+            var hide = function () { video.classList.add('hidden'); };
+            video.addEventListener('error', hide);
+            if (source) source.addEventListener('error', hide);
+        })();
+    </script>
+
+</body>
+</html>

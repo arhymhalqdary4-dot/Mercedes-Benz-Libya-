@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الموديلات | مرسيدس-بنز ليبيا</title>
+    <meta name="description" content="تشكيلة مرسيدس-بنز في ليبيا: CLA، GLC Coupe، X-Class. اطلب عرض سعر الآن.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Cairo', sans-serif; background-color: #050505; color: #ffffff; }
+        html { scroll-behavior: smooth; }
+
+        /* ظهور تدريجي للكروت */
+        .card-reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+        .card-reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+        @media (prefers-reduced-motion: reduce) {
+            .card-reveal { opacity: 1; transform: none; transition: none; }
+            html { scroll-behavior: auto; }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-gray-600 selection:text-white flex flex-col min-h-screen">
+
+    <!-- ==================== الهيدر ==================== -->
+    <header class="fixed w-full top-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-black tracking-widest uppercase">
+                Mercedes <span class="font-light">Libya</span>
+            </a>
+
+            <nav class="hidden md:flex space-x-8 space-x-reverse">
+                <a href="index.html" class="hover:text-gray-400 transition duration-300">الرئيسية</a>
+                <a href="models.html" class="text-white transition duration-300">الموديلات</a>
+                <a href="index.html#about" class="hover:text-gray-400 transition duration-300">من نحن</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <a href="index.html#contact" class="hidden sm:inline-block px-6 py-2 border border-white hover:bg-white hover:text-black transition duration-300 font-bold">تواصل معنا</a>
+
+                <button id="menuBtn" type="button" aria-label="القائمة" aria-expanded="false" aria-controls="mobileMenu"
+                        class="md:hidden p-2 border border-white/30 hover:border-white transition duration-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <nav id="mobileMenu" class="hidden md:hidden border-t border-white/10 bg-black/95 backdrop-blur-md">
+            <div class="container mx-auto px-6 py-4 flex flex-col gap-4">
+                <a href="index.html" class="hover:text-gray-400 transition duration-300">الرئيسية</a>
+                <a href="models.html" class="hover:text-gray-400 transition duration-300">الموديلات</a>
+                <a href="index.html#about" class="hover:text-gray-400 transition duration-300">من نحن</a>
+                <a href="index.html#contact" class="hover:text-gray-400 transition duration-300">تواصل معنا</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow pt-28">
+        <!-- ==================== عنوان الصفحة ==================== -->
+        <section class="container mx-auto px-6 pt-12 pb-4 text-center">
+            <p class="text-sm tracking-[0.3em] uppercase text-gray-500 mb-4">Mercedes-Benz Libya</p>
+            <h1 class="text-4xl md:text-6xl font-black mb-4">أحدث الموديلات</h1>
+            <p class="text-gray-400 max-w-2xl mx-auto text-lg font-light">
+                تشكيلة مختارة بعناية من سيارات مرسيدس-بنز، تجمع بين الأداء الألماني والتصميم الفاخر.
+            </p>
+        </section>
+
+        <!-- ==================== شبكة السيارات ==================== -->
+        <section id="models" class="py-16 container mx-auto px-6">
+            <div id="carsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- تُولَّد الكروت أوتوماتيكياً عبر JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== الفوتر ==================== -->
+    <footer class="border-t border-white/10 py-8 text-center text-gray-500 text-sm mt-auto">
+        <p>&copy; 2026 مرسيدس-بنز ليبيا. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        // ====== بيانات السيارات: أضف موديلاً جديداً هنا ليظهر في الشبكة تلقائياً ======
+        const cars = [
+            {
+                name: 'Mercedes-Benz CLA',
+                description: 'سيدان رياضية بتصميم انسيابي فخم.',
+                image: '1000135865.jpg'
+            },
+            {
+                name: 'Mercedes-Benz GLC Coupe',
+                description: 'سيارة دفع رباعي رياضية تجمع بين الأناقة والقوة.',
+                image: '1000134925.png'
+            },
+            {
+                name: 'Mercedes-Benz X-Class',
+                description: 'بيك أب فارهة للمهام الصعبة والطرق الوعرة.',
+                image: '1000134393.png'
+            }
+        ];
+
+        // رقم الواتساب للتواصل (بصيغة دولية بدون + أو مسافات) — عدّله برقم الوكيل
+        const WHATSAPP_NUMBER = '218910000000';
+
+        const grid = document.getElementById('carsGrid');
+
+        cars.forEach(function (car, index) {
+            const card = document.createElement('article');
+
+            // كرت زجاجي (Glassmorphism) مع تأثير ارتفاع عند المرور
+            card.className = [
+                'card-reveal group flex flex-col overflow-hidden rounded-2xl',
+                'bg-black/40 backdrop-blur-xl border border-white/20',
+                'shadow-2xl shadow-black/50',
+                'transition duration-500 ease-out',
+                'hover:-translate-y-3 hover:border-white/40 hover:bg-black/50 hover:shadow-white/10'
+            ].join(' ');
+            card.style.transitionDelay = (index * 120) + 'ms';
+
+            // ---- الصورة ----
+            const figure = document.createElement('div');
+            figure.className = 'relative h-56 overflow-hidden bg-gradient-to-br from-gray-800 to-black';
+
+            const img = document.createElement('img');
+            img.src = car.image;
+            img.alt = car.name;
+            img.loading = 'lazy';
+            img.className = 'w-full h-full object-cover transition duration-700 ease-out group-hover:scale-110';
+            // إخفاء الصورة عند تعذر تحميلها لتظهر الخلفية المتدرجة
+            img.addEventListener('error', function () { img.classList.add('opacity-0'); });
+
+            const shade = document.createElement('div');
+            shade.className = 'absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent';
+
+            figure.appendChild(img);
+            figure.appendChild(shade);
+
+            // ---- المحتوى ----
+            const body = document.createElement('div');
+            body.className = 'flex flex-col flex-grow p-6';
+
+            const title = document.createElement('h2');
+            title.className = 'text-2xl font-bold mb-2 tracking-wide';
+            title.textContent = car.name;
+
+            const desc = document.createElement('p');
+            desc.className = 'text-gray-400 font-light leading-relaxed mb-6 flex-grow';
+            desc.textContent = car.description;
+
+            // ---- زر اطلب عرض سعر ----
+            const cta = document.createElement('a');
+            cta.href = 'https://wa.me/' + WHATSAPP_NUMBER +
+                       '?text=' + encodeURIComponent('مرحباً، أرغب في الحصول على عرض سعر لسيارة ' + car.name);
+            cta.target = '_blank';
+            cta.rel = 'noopener noreferrer';
+            cta.className = [
+                'inline-flex items-center justify-center gap-2 w-full px-6 py-3',
+                'border border-white/70 font-bold tracking-wide',
+                'hover:bg-white hover:text-black transition duration-300'
+            ].join(' ');
+            cta.textContent = 'اطلب عرض سعر';
+
+            body.appendChild(title);
+            body.appendChild(desc);
+            body.appendChild(cta);
+
+            card.appendChild(figure);
+            card.appendChild(body);
+            grid.appendChild(card);
+        });
+
+        // ظهور تدريجي للكروت عند التمرير
+        (function () {
+            const cards = document.querySelectorAll('.card-reveal');
+
+            if (!('IntersectionObserver' in window)) {
+                cards.forEach(function (c) { c.classList.add('is-visible'); });
+                return;
+            }
+
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            cards.forEach(function (c) { observer.observe(c); });
+        })();
+
+        // قائمة الجوال
+        (function () {
+            const btn = document.getElementById('menuBtn');
+            const menu = document.getElementById('mobileMenu');
+            if (!btn || !menu) return;
+
+            btn.addEventListener('click', function () {
+                const isOpen = menu.classList.toggle('hidden') === false;
+                btn.setAttribute('aria-expanded', String(isOpen));
+            });
+
+            menu.addEventListener('click', function (e) {
+                if (e.target.tagName === 'A') {
+                    menu.classList.add('hidden');
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+            });
+        })();
+    </script>
+
+</body>
+</html>
