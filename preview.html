@@ -342,7 +342,34 @@ main { padding-block-start: var(--nav-h); }
   overflow: hidden;
   isolation: isolate;
 }
-.hero-bg { position: absolute; inset: 0; z-index: -2; background: var(--ground); }
+/* Video background.
+   scale + a nudge toward the corner pushes the source's bottom-right
+   watermark outside the container, which clips it (.hero is overflow:hidden).
+   The nudge is in physical units on purpose — the watermark is baked into
+   the file at bottom-right and does not mirror in RTL. */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.08) translate(1.2%, 1.5%);
+  pointer-events: none;
+}
+
+/* Dark overlay — sits above the video, below the copy */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(to bottom, rgba(4, 5, 8, .55), rgba(4, 5, 8, .72) 62%, var(--ground)),
+    rgba(0, 0, 0, .6);
+}
+
+.hero-bg { position: absolute; inset: 0; z-index: -4; background: var(--ground); }
 .hero-bg::before {
   content: "";
   position: absolute;
@@ -371,12 +398,13 @@ main { padding-block-start: var(--nav-h); }
   background: var(--hairline);
   opacity: .22;
 }
+/* Fallback art: visible through the overlay whenever the video is absent */
 .hero-car {
   position: absolute;
   inset-block-end: 24%;
   inset-inline-end: -4%;
   width: min(56%, 760px);
-  z-index: -1;
+  z-index: -3;
   opacity: .34;
   filter: blur(.3px);
 }
@@ -1042,14 +1070,18 @@ html[lang="ar"] .footer-col h4 { letter-spacing: 0; font-size: .84rem; text-tran
       return '' +
         '<section class="hero">' +
           '<div class="hero-bg"></div>' +
-          '<div class="hero-floor"></div>' +
           '<div class="hero-car">' + carSVG("sedan", "hero") + '</div>' +
+          '<video class="hero-video" data-hero-video autoplay loop muted playsinline preload="auto" aria-hidden="true" tabindex="-1">' +
+            '<source src="hero-car.mp4" type="video/mp4">' +
+          '</video>' +
+          '<div class="hero-overlay"></div>' +
+          '<div class="hero-floor"></div>' +
           '<div class="container hero-inner">' +
             '<p class="eyebrow">' + h.eyebrow + '</p>' +
             '<h1 class="display hero-title chrome-text">' + h.title + '</h1>' +
             '<p class="lead hero-lead">' + h.lead + '</p>' +
             '<div class="hero-actions">' +
-              '<a class="btn btn-solid" href="' + PATHS.models + '">' + h.ctaPrimary + '</a>' +
+              '<a class="btn" href="' + PATHS.models + '">' + h.ctaPrimary + '</a>' +
               '<a class="btn" href="' + PATHS.services + '">' + h.ctaSecondary + '</a>' +
             '</div>' +
             '<div class="spec-rail">' +
@@ -1227,6 +1259,24 @@ html[lang="ar"] .footer-col h4 { letter-spacing: 0; font-size: .84rem; text-tran
       '<span>' + d.footer.rights + '</span><span>' + d.footer.note + '</span>';
   }
 
+  /* If hero-car.mp4 is missing or the codec is unsupported, drop the <video>
+     so the gradient light-pool and silhouette behind it show through cleanly
+     instead of a black rectangle. */
+  function initHeroVideo() {
+    var video = el.view.querySelector("[data-hero-video]");
+    if (!video) { return; }
+
+    var drop = function () { video.style.display = "none"; };
+    video.addEventListener("error", drop, true);
+
+    var source = video.querySelector("source");
+    if (source) { source.addEventListener("error", drop); }
+
+    // Autoplay can still be refused (e.g. iOS low-power mode) — ignore quietly.
+    var started = video.play();
+    if (started && started.catch) { started.catch(function () {}); }
+  }
+
   function closeDrawer() {
     el.drawer.classList.remove("open");
     el.burger.setAttribute("aria-expanded", "false");
@@ -1251,6 +1301,7 @@ html[lang="ar"] .footer-col h4 { letter-spacing: 0; font-size: .84rem; text-tran
     el.view.innerHTML = '<div class="page">' + PAGES[route](d) + '</div>';
     renderFooter(d);
     closeDrawer();
+    initHeroVideo();
 
     if (scrollTop) { window.scrollTo({ top: 0, behavior: "auto" }); }
   }
